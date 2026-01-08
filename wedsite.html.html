@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scofield's Auto — Quality Cars, Fair Prices</title>
+  <meta name="description" content="Scofield's Auto - Reliable used & new cars, financing assistance, inspection & trade-in services." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <style>
+    :root{
+      --accent:#0b6efd;
+      --accent-2:#ff6b6b;
+      --muted:#6b7280;
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --radius:12px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f172a;line-height:1.45}
+    header{background:linear-gradient(90deg,#ffffffcc, #f0f6ffcc);backdrop-filter:saturate(140%);position:sticky;top:0;z-index:60;border-bottom:1px solid #e6eefc}
+    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:14px}
+    .logo{font-weight:700;color:var(--accent);font-size:20px}
+    nav{margin-left:auto;display:flex;gap:12px;align-items:center}
+    nav a{color:#0f172a;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
+    nav a.cta{background:var(--accent);color:#fff}
+    .container{max-width:1200px;margin:36px auto;padding:0 20px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center}
+    .hero-card{background:var(--card);padding:28px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(12,38,63,0.06)}
+    .hero h1{margin:0 0 10px;font-size:34px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:12px 16px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+    .btn.primary{background:var(--accent);color:#fff}
+    .btn.ghost{background:transparent;border:2px solid #e8f0ff;color:var(--accent)}
+
+    /* Search */
+    .search {display:flex;gap:8px;margin-top:14px}
+    .search input, .search select{padding:10px;border-radius:10px;border:1px solid #e6eefc;flex:1}
+    .search button{padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;border:none}
+
+    /* Inventory */
+    .inventory {margin-top:34px}
+    .inventory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(12,38,63,0.05);display:flex;flex-direction:column;gap:10px}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    .card .meta{display:flex;justify-content:space-between;align-items:center}
+    .price{font-weight:800;color:var(--accent)}
+    .specs{color:var(--muted);font-size:14px}
+    .card .actions{display:flex;gap:8px;margin-top:auto}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:120}
+    .modal{width:96%;max-width:900px;background:#fff;border-radius:12px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .modal img{width:100%;height:320px;object-fit:cover;border-radius:8px}
+    .close-btn{position:absolute;top:12px;right:12px;background:#fff;border-radius:999px;padding:8px;border:none;cursor:pointer}
+
+    /* Testimonials & About */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .testimonial{background:linear-gradient(90deg,#fff,#fff);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(12,38,63,0.04)}
+
+    /* Contact */
+    .contact-card{background:var(--card);padding:18px;border-radius:12px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    input, textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eefc}
+    button[type="submit"]{padding:12px 16px;border-radius:10px;background:var(--accent-2);color:#fff;border:none;font-weight:800}
+
+    footer{margin-top:32px;padding:30px 0;background:transparent;color:var(--muted);border-top:1px solid #e6eefc}
+    .footer-row{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;padding:0 20px}
+
+    /* responsive */
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}.modal{grid-template-columns:1fr}}
+    @media (max-width:520px){.nav{padding:10px}.logo{font-size:18px}.hero h1{font-size:26px}.search{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">Scofield's Auto</div>
+      <nav>
+        <a href="https://samuelscofield.ct.ws/">Inventory</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Find your perfect car — trusted, certified, affordable.</h1>
+        <p>Prime Auto helps you buy and sell quality used and new cars. Inspection, trade-in, financing assistance, and warranty options available.</p>
+        <div class="actions">
+          <button class="btn primary" onclick="scrollToSection('inventory')">Browse Inventory</button>
+          <button class="btn ghost" onclick="scrollToSection('contact')">Request a Quote</button>
+        </div>
+
+        <div class="search" style="margin-top:18px">
+          <input id="searchText" placeholder="Search make, model, year..." oninput="filterInventory()" />
+          <select id="filterType" onchange="filterInventory()">
+            <option value="">All types</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Truck">Truck</option>
+          </select>
+          <button onclick="resetFilters()">Reset</button>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:linear-gradient(180deg,#fff,#f7fbff);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(12,38,63,0.06)">
+          <h3 style="margin-top:0">Why Choose Prime Auto</h3>
+          <ul style="color:var(--muted);padding-left:18px">
+            <li>Certified inspections on every vehicle</li>
+            <li>Flexible financing and trade-ins</li>
+            <li>Transparent pricing — no hidden fees</li>
+            <li>Local service & nationwide shipping</li>
+          </ul>
+          <div style="margin-top:12px;font-size:14px;color:var(--muted)">Call us: <strong>+233 59 000 0000</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTORY -->
+    <section id="inventory" class="inventory">
+      <h2>Available Cars</h2>
+      <p style="color:var(--muted)">Click a car for details, or use the search/filter to quickly find what you need.</p>
+
+      <div class="inventory-grid" id="inventoryGrid">
+        <!-- JS will populate cards -->
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" style="margin-top:32px">
+      <h2>Our Services</h2>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="testimonial">
+          <h3>Inspection & Certification</h3>
+          <p class="specs">Every vehicle is inspected by certified mechanics and comes with a condition report.</p>
+        </div>
+        <div class="testimonial">
+          <h3>Financing Assistance</h3>
+          <p class="specs">We partner with local lenders to help you get flexible payment plans.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section style="margin-top:32px">
+      <h2>What Customers Say</h2>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <div class="testimonial" style="flex:1;min-width:260px">
+          <strong>Agnes A.</strong>
+          <p class="specs">"Great experience — transparent and fast. My family loves the new car!"</p>
+        </div>
+        <div class="testimonial" style="flex:1;min-width:260px">
+          <strong>Kofi A.</strong>
+          <p class="specs">"Helpful sales team and reliable after-sales service."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT & CONTACT -->
+    <section id="about" style="margin-top:32px">
+      <h2>About Prime Auto</h2>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="card" style="padding:18px">
+          <p class="specs">Prime Auto has been serving customers with quality vehicles and trusted service. Our mission is to make car buying simple and fair. Visit our showroom or book a test drive today.</p>
+          <ul style="color:var(--muted)">
+            <li>Address: Suame, Kumasi</li>
+            <li>Hours: Mon–Sat 9:00–18:00</li>
+          </ul>
+        </div>
+
+        <div class="contact-card" id="contact">
+          <h3>Contact Us</h3>
+          <form id="contactForm" onsubmit="submitContact(event)">
+            <div class="form-row">
+              <input id="name" placeholder="Your name" required />
+              <input id="email" type="email" placeholder="Email" required />
+            </div>
+            <div class="form-row" style="margin-top:8px">
+              <input id="phone" placeholder="Phone number" required />
+              <input id="subject" placeholder="Subject" />
+            </div>
+            <textarea id="message" rows="4" placeholder="Message"></textarea>
+            <div style="margin-top:10px;display:flex;gap:10px">
+              <button type="submit">Send Message</button>
+              <button type="button" onclick="openWhatsApp()">WhatsApp</button>
+            </div>
+            <p id="formStatus" style="color:var(--muted);font-size:13px;margin-top:10px"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section style="margin-top:32px">
+      <h2>Find Us</h2>
+      <p style="color:var(--muted)">Our showroom location (tap to open Google Maps)</p>
+      <!-- Replace src with your Google Maps embed link -->
+      <div style="border-radius:12px;overflow:hidden;margin-top:12px">
+        <iframe
+          title="Prime Auto location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.0000000000005!2d-1.5!3d6.7"
+          style="width:100%;height:320px;border:0"
+          allowfullscreen=""
+          loading="lazy"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <div>
+        <strong>Scofield's Auto</strong><br>
+        Trusted cars • Trade-ins • Financing
+      </div>
+      <div style="text-align:right">
+        <div class="specs">Call: +233 59 000 0000</div>
+        <div style="margin-top:8px">© <span id="year"></span> Prime Auto</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal placeholder -->
+  <div id="carModal" style="display:none"></div>
+
+  <script>
+    // sample inventory data (replace with your data or fetch from backend)
+    const inventory = [
+      {
+        id: "A001", make: "Toyota", model: "Corolla", year: 2018, price: "GH₵65,000",
+        type: "Sedan", mileage: "92,000 km", color: "White",
+        img: "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=60",
+        description: "Reliable sedan, single owner, full service history."
+      },
+      {
+        id: "A002", make: "Honda", model: "CR-V", year: 2017, price: "GH₵112,000",
+        type: "SUV", mileage: "120,000 km", color: "Grey",
+        img: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=60",
+        description: "Comfortable family SUV with recent inspection."
+      },
+      {
+        id: "A003", make: "Nissan", model: "Navara", year: 2019, price: "GH₵145,000",
+        type: "Truck", mileage: "80,000 km", color: "Black",
+        img: "https://images.unsplash.com/photo-1542362567-0b1b87f2f4b5?auto=format&fit=crop&w=1200&q=60",
+        description: "Work-ready truck with strong towing capacity."
+      }
+    ];
+
+    // initialize
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const grid = document.getElementById('inventoryGrid');
+
+    function renderInventory(list) {
+      grid.innerHTML = '';
+      if(!list.length){
+        grid.innerHTML = '<div style="color:var(--muted);padding:20px">No vehicles match your search.</div>';
+        return;
+      }
+      list.forEach(car => {
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML = `
+          <img src="${car.img}" alt="${car.make} ${car.model}">
+          <div><strong>${car.make} ${car.model}</strong> • ${car.year}</div>
+          <div class="meta">
+            <div class="specs">${car.type} • ${car.mileage}</div>
+            <div class="price">${car.price}</div>
+          </div>
+          <div style="display:flex;gap:8px" class="actions">
+            <button class="btn" onclick="openDetails('${car.id}')">Details</button>
+            <button class="btn primary" onclick="bookTestDrive('${car.id}')">Book Test Drive</button>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    // initial render
+    renderInventory(inventory);
+
+    // filter/search
+    function filterInventory(){
+      const q = document.getElementById('searchText').value.trim().toLowerCase();
+      const type = document.getElementById('filterType').value;
+      const filtered = inventory.filter(c => {
+        const matchesQuery = `${c.make} ${c.model} ${c.year}`.toLowerCase().includes(q);
+        const matchesType = type ? c.type === type : true;
+        return matchesQuery && matchesType;
+      });
+      renderInventory(filtered);
+    }
+    function resetFilters(){
+      document.getElementById('searchText').value = '';
+      document.getElementById('filterType').value = '';
+      renderInventory(inventory);
+    }
+
+    // modal / details
+    function openDetails(id){
+      const car = inventory.find(c => c.id === id);
+      if(!car) return;
+      const modal = document.getElementById('carModal');
+      modal.style.display = 'block';
+      modal.innerHTML = `
+        <div class="modal-backdrop" onclick="closeModal()">
+          <div class="modal" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <div>
+              <img src="${car.img}" alt="${car.make} ${car.model}">
+            </div>
+            <div>
+              <h2>${car.make} ${car.model} • ${car.year}</h2>
+              <p class="specs">${car.description}</p>
+              <p><strong>Price:</strong> <span class="price">${car.price}</span></p>
+              <p><strong>Mileage:</strong> ${car.mileage}</p>
+              <p><strong>Color:</strong> ${car.color}</p>
+              <div style="margin-top:12px;display:flex;gap:8px">
+                <button class="btn primary" onclick="bookTestDrive('${car.id}')">Book Test Drive</button>
+                <button class="btn" onclick="contactForOffer('${car.id}')">Make Offer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    function closeModal(){
+      const modal = document.getElementById('carModal');
+      modal.style.display = 'none';
+      modal.innerHTML = '';
+    }
+
+    // booking / contact actions (placeholders)
+    function bookTestDrive(id){
+      const car = inventory.find(c => c.id === id);
+      alert(`Thanks! We'll contact you to arrange a test drive for ${car.make} ${car.model}.`);
+    }
+    function contactForOffer(id){
+      const car = inventory.find(c => c.id === id);
+      window.location.hash = '#contact';
+      document.getElementById('subject').value = `Offer for ${car.make} ${car.model} (${car.id})`;
+    }
+
+    // contact form action (frontend-demo)
+    function submitContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if(!name || !email || !phone || !message) {
+        document.getElementById('formStatus').textContent = 'Please fill all required fields.';
+        return;
+      }
+      // In production, send data to your server. For demo, we show success
+      document.getElementById('formStatus').textContent = 'Message sent! We will contact you shortly.';
+      // reset form (optional)
+      document.getElementById('contactForm').reset();
+    }
+
+    function openWhatsApp(){
+      // replace with your phone number in international format without +, e.g., 233590000000
+      const phone = "233590000000";
+      const text = encodeURIComponent("Hello Prime Auto, I want more info about cars.");
+      window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    }
+
+    // utility: scroll
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  </script>
+</body>
+</html>
